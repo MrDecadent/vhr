@@ -7,12 +7,56 @@
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="component" property="component" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="iconCls" property="iconcls" jdbcType="VARCHAR" />
-    <result column="keepAlive" property="keepalive" jdbcType="BIT" />
-    <result column="requireAuth" property="requireauth" jdbcType="BIT" />
-    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="iconCls" property="iconCls" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentId" jdbcType="INTEGER" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
+    <association property="meta" javaType="com.dcd.vhr.model.Meta">
+      <result column="keepAlive" property="keepAlive" jdbcType="BIT"/>
+      <result column="requireAuth" property="requireAuth" jdbcType="BIT"/>
+    </association>
   </resultMap>
+
+  <resultMap id="BaseResultMap2" type="com.dcd.vhr.model.Menu" extends="BaseResultMap">
+    <collection property="children" ofType="com.dcd.vhr.model.Menu">
+      <id column="id2" property="id" jdbcType="INTEGER" />
+      <result column="url2" property="url" jdbcType="VARCHAR" />
+      <result column="path2" property="path" jdbcType="VARCHAR" />
+      <result column="component2" property="component" jdbcType="VARCHAR" />
+      <result column="name2" property="name" jdbcType="VARCHAR" />
+      <result column="iconCls2" property="iconCls" jdbcType="VARCHAR" />
+      <result column="parentId2" property="parentId" jdbcType="INTEGER" />
+      <result column="enabled2" property="enabled" jdbcType="BIT" />
+      <association property="meta" javaType="com.dcd.vhr.model.Meta">
+        <result column="keepAlive2" property="keepAlive" jdbcType="BIT"/>
+        <result column="requireAuth2" property="requireAuth" jdbcType="BIT"/>
+      </association>
+    </collection>
+  </resultMap>
+  
+  <select id="getMenusIdByHrId" resultMap="BaseResultMap2">
+    SELECT DISTINCT
+        m1.*
+        ,m2.id as id2
+        ,m2.component as component2
+        ,m2.enabled as enabled2
+        ,m2.iconCls as iconCls2
+        ,m2.keepAlive as keepAlive2
+        ,m2.`name` as name2
+        ,m2.parentId as parentId2
+        ,m2.path as path2
+        ,m2.requireAuth as requireAuth2
+    FROM
+        menu m1
+        left JOIN	menu m2 ON m1.parentId = m2.id
+        LEFT JOIN menu_role mr ON m1.id = mr.mid
+        LEFT JOIN hr_role hrr ON hrr.rid = mr.rid
+        LEFT JOIN hr h ON h.id = hrr.hrid
+    WHERE
+        h.id = #{hrid} and m1.enabled = TRUE
+    ORDER BY
+        m1.id
+  </select>
+
   <sql id="Base_Column_List" >
     id, url, path, component, name, iconCls, keepAlive, requireAuth, parentId, enabled
   </sql>

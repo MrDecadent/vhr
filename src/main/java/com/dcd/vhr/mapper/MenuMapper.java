@@ -2,6 +2,8 @@ package com.dcd.vhr.mapper;
 
 import com.dcd.vhr.model.Menu;
 
+import java.util.List;
+
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+
+    List<Menu> getMenusIdByHrId(Integer id);
 }

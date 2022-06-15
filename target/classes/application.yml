@@ -4,3 +4,6 @@ spring:
     username: root
     password: 159357la
     url: jdbc:mysql://1.12.217.151:3306/vhr?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+
+server:
+  port: 8081
