@@ -35,26 +35,27 @@
   
   <select id="getMenusIdByHrId" resultMap="BaseResultMap2">
     SELECT DISTINCT
-        m1.*
-        ,m2.id as id2
-        ,m2.component as component2
-        ,m2.enabled as enabled2
-        ,m2.iconCls as iconCls2
-        ,m2.keepAlive as keepAlive2
-        ,m2.`name` as name2
-        ,m2.parentId as parentId2
-        ,m2.path as path2
-        ,m2.requireAuth as requireAuth2
+        m2.*,
+        m1.`id` AS id2,
+        m1.`component` AS component2,
+        m1.`enabled` AS enabled2,
+        m1.`iconCls` AS iconCls2,
+        m1.`keepAlive` AS keepAlive2,
+        m1.`name` AS name2,
+        m1.`parentId` AS parentId2,
+        m1.`requireAuth` AS requireAuth2,
+        m1.`path` AS path2
     FROM
-        menu m1
-        left JOIN	menu m2 ON m1.parentId = m2.id
-        LEFT JOIN menu_role mr ON m1.id = mr.mid
-        LEFT JOIN hr_role hrr ON hrr.rid = mr.rid
-        LEFT JOIN hr h ON h.id = hrr.hrid
+        hr_role hrr
+        LEFT JOIN menu_role mr ON mr.rid = hrr.rid
+        LEFT JOIN menu m1 ON m1.id = mr.mid
+        LEFT JOIN menu m2 ON m1.parentId = m2.id
     WHERE
-        h.id = #{hrid} and m1.enabled = TRUE
+        hrr.hrid = #{hrid}
+        AND m2.`enabled` = TRUE
     ORDER BY
-        m1.id
+        m1.`id`,
+        m2.`id`
   </select>
 
   <sql id="Base_Column_List" >
