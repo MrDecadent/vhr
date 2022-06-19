@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -126,6 +127,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
                 .and()
-                .csrf().disable();
+                .csrf().disable().exceptionHandling()
+                //没有登陆时，在这里处理结果，不要重定向(默认重定向)
+                .authenticationEntryPoint(new AuthenticationEntryPoint() {
+            @Override
+            public void commence(HttpServletRequest httpServletRequest
+                    , HttpServletResponse httpServletResponse
+                    , AuthenticationException e) throws IOException, ServletException {
+                httpServletResponse.setContentType("application/json;charset=utf-8");
+                PrintWriter out = httpServletResponse.getWriter();
+                RespBean error = RespBean.error("访问失败!");
+                if (e instanceof InsufficientAuthenticationException){
+                    error.setMsg("请求失败，请联系管理员！");
+                }
+                out.write(new ObjectMapper().writeValueAsString(error));
+                out.flush();
+                out.close();
+            }
+        });
     }
 }

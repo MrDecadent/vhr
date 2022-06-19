@@ -17,6 +17,21 @@
     id, name, phone, telephone, address, enabled, username, password, userface, remark
   </sql>
 
+  <select id="getHrRolesById" resultType="com.dcd.vhr.model.Role">
+    select
+        role.id
+        ,role.`name`
+        ,role.nameZh
+    from
+        hr_role hrr
+    left join
+        role
+    on
+        role.id = hrr.rid
+    WHERE
+        hrr.hrid = #{id}
+  </select>
+  
   <select id="loadUserByUsername" resultMap="BaseResultMap">
     select * from hr where hr.username=#{username};
   </select>
