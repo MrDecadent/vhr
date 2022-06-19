@@ -32,7 +32,31 @@
       </association>
     </collection>
   </resultMap>
-  
+
+  <resultMap id="MenusWithRoles" type="com.dcd.vhr.model.Menu" extends="BaseResultMap">
+    <collection property="roles" ofType="com.dcd.vhr.model.Role">
+      <id column="rid" property="id"/>
+      <result column="rname" property="name"/>
+      <result column="rnameZh" property="namezh"/>
+    </collection>
+  </resultMap>
+
+  <select id="getAllMenusWithRoles" resultMap="MenusWithRoles">
+    SELECT
+      m.*,
+      r.id as rid,
+      r.`name` as rname,
+      r.nameZh as rnameZh
+    FROM
+        role r
+        LEFT JOIN menu_role mr ON mr.rid = r.id
+        LEFT JOIN menu m ON mr.mid = m.id
+    WHERE
+        m.enabled = TRUE
+    ORDER BY
+        m.id
+  </select>
+
   <select id="getMenusIdByHrId" resultMap="BaseResultMap2">
     SELECT DISTINCT
         m2.*,

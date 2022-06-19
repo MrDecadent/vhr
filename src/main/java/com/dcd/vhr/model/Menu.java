@@ -23,6 +23,17 @@ public class Menu {
 
     private List<Menu> children;
 
+    //菜单项所需要的角色
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public Meta getMeta() {
         return meta;
     }

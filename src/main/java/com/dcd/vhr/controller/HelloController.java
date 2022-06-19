@@ -10,4 +10,14 @@ public class HelloController {
     public String hello(){
         return "hello";
     }
+
+    @GetMapping("/salary/sob/hello")
+    public String hello2(){
+        return "/salary/sob/hello";
+    }
+
+    @GetMapping("/salary/sobcfg/hello")
+    public String hello3(){
+        return "/salary/sobcfg/hello";
+    }
 }

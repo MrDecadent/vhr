@@ -1,6 +1,9 @@
 package com.dcd.vhr.mapper;
 
 import com.dcd.vhr.model.Hr;
+import com.dcd.vhr.model.Role;
+
+import java.util.List;
 
 public interface HrMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,6 @@ public interface HrMapper {
     int updateByPrimaryKey(Hr record);
 
     Hr loadUserByUsername(String s);
+
+    List<Role> getHrRolesById(Integer id);
 }
