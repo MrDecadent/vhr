@@ -1,6 +1,5 @@
-package com.dcd.vhr.controller;
+package com.dcd.vhr.controller.config;
 
-import com.dcd.vhr.model.Hr;
 import com.dcd.vhr.model.Menu;
 import com.dcd.vhr.service.MenuService;
 import org.springframework.web.bind.annotation.GetMapping;

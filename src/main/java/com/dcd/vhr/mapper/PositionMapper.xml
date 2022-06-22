@@ -10,6 +10,18 @@
   <sql id="Base_Column_List" >
     id, name, createDate, enabled
   </sql>
+
+  
+  <select id="getAllPositions" resultMap="BaseResultMap">
+    SELECT
+      id
+      ,name
+      ,createDate
+      ,enabled
+    FROM
+      position
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -79,4 +91,8 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deletePositionByPrimaryKey" parameterType="java.lang.Integer">
+    DELETE FROM position where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>
