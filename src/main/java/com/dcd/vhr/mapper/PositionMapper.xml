@@ -95,4 +95,12 @@
   <delete id="deletePositionByPrimaryKey" parameterType="java.lang.Integer">
     DELETE FROM position where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deletePositionsByIds">
+    DELETE FROM position where id in
+    <foreach collection="ids" item = "id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
 </mapper>

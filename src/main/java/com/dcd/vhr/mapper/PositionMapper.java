@@ -2,6 +2,7 @@ package com.dcd.vhr.mapper;
 
 import com.dcd.vhr.model.Position;
 import com.dcd.vhr.model.RespBean;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface PositionMapper {
     List<Position> getAllPositions();
 
     Integer deletePositionByPrimaryKey(Integer id);
+
+    Integer deletePositionsByIds(@Param("ids") Integer[] ids);
 }
