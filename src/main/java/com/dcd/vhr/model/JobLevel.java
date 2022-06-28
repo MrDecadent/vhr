@@ -2,7 +2,7 @@ package com.dcd.vhr.model;
 
 import java.util.Date;
 
-public class JObLevel {
+public class JobLevel {
     private Integer id;
 
     private String name;
