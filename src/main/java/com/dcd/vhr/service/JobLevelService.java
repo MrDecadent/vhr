@@ -29,4 +29,8 @@ public class JobLevelService {
     public Integer updateJobLevel(JobLevel jobLevel) {
         return jobLevelMapper.updateByPrimaryKeySelective(jobLevel);
     }
+
+    public Integer deleteJobLevelsByIds(Integer[] ids) {
+        return jobLevelMapper.deleteJobLevelsByIds(ids);
+    }
 }

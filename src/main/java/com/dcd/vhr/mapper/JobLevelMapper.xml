@@ -29,6 +29,14 @@
     delete from joblevel
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteJobLevelsByIds">
+    delete from joblevel
+    where id in
+    <foreach collection="ids" item = "id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.dcd.vhr.model.JobLevel" >
     insert into joblevel (id, name, titleLevel, 
       createDate, enabled)
@@ -98,4 +106,6 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
 </mapper>

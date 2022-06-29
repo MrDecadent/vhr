@@ -11,6 +11,14 @@
   <sql id="Base_Column_List" >
     id, name, titleLevel, createDate, enabled
   </sql>
+
+  <select id="getAllJobLevel" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from
+        joblevel;
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -20,6 +28,14 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from joblevel
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteJobLevelsByIds">
+    delete from joblevel
+    where id in
+    <foreach collection="ids" item = "id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.dcd.vhr.model.JobLevel" >
     insert into joblevel (id, name, titleLevel, 
@@ -90,4 +106,6 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
 </mapper>
