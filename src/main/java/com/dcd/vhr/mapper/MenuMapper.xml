@@ -54,6 +54,15 @@
     </collection>
   </resultMap>
 
+  <select id="getMidsByRid" resultType="java.lang.Integer">
+    select
+        mid
+    from
+        menu_role
+    where
+        rid = #{rid}
+  </select>
+
   <select id="getAllMenus" resultMap="MenuWithChildren">
     SELECT
       m1.id AS id1,
