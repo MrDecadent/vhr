@@ -43,4 +43,22 @@ public class PermissionController {
             return RespBean.error("更新失败");
         }
     }
+
+    @PostMapping("/")
+    public RespBean addRole(@RequestBody Role role){
+        if (roleService.addRole(role) == 1){
+            return RespBean.ok("添加成功");
+        }else {
+            return RespBean.error("添加失败");
+        }
+    }
+
+    @DeleteMapping("/{rid}")
+    public RespBean deleteRoleByRid(@PathVariable("rid") Integer rid){
+        if (roleService.deleteRoleByRid(rid) == 1){
+            return RespBean.ok("删除成功");
+        }else {
+            return RespBean.error("删除失败");
+        }
+    }
 }

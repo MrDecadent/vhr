@@ -15,10 +15,25 @@
     from menu_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <delete id="deleteByRid">
+    delete from menu_role where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from menu_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <insert id="insertRecord">
+    insert into menu_role
+        (mid,rid)
+    values 
+        <foreach collection="mids" separator="," item="mid">
+          (#{mid},#{rid})
+        </foreach>
+  </insert>
+  
   <insert id="insert" parameterType="com.dcd.vhr.model.MenuRole" >
     insert into menu_role (id, mid, rid)
     values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER})
