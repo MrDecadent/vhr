@@ -1,6 +1,7 @@
 package com.dcd.vhr.service;
 
 import com.dcd.vhr.mapper.RoleMapper;
+import com.dcd.vhr.model.Menu;
 import com.dcd.vhr.model.Role;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,8 @@
 package com.dcd.vhr.controller.system.basic;
 
+import com.dcd.vhr.model.Menu;
 import com.dcd.vhr.model.Role;
+import com.dcd.vhr.service.MenuService;
 import com.dcd.vhr.service.RoleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,16 @@ public class PermissionController {
     @Resource
     RoleService roleService;
 
+    @Resource
+    MenuService menuService;
+
     @GetMapping("/")
     public List<Role> getAllRoles(){
         return roleService.getAllRoles();
+    }
+
+    @GetMapping("/menus")
+    public List<Menu> getAllMenus(){
+        return menuService.getAllMenus();
     }
 }
