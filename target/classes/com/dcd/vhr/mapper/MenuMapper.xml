@@ -41,6 +41,39 @@
     </collection>
   </resultMap>
 
+  <resultMap id="MenuWithChildren" type="com.dcd.vhr.model.Menu" extends="BaseResultMap">
+    <id column="id1" property="id"/>
+    <result column="name1" property="name"/>
+    <collection property="children" ofType="com.dcd.vhr.model.Menu">
+      <id column="id2" property="id"/>
+      <result column="name2" property="name"/>
+      <collection property="children" ofType="com.dcd.vhr.model.Menu">
+        <id column="id3" property="id"/>
+        <result column="name3" property="name"/>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <select id="getAllMenus" resultMap="MenuWithChildren">
+    SELECT
+      m1.id AS id1,
+      m1.NAME AS name1,
+      m2.id AS id2,
+      m2.NAME AS name2,
+      m3.id AS id3,
+      m3.NAME AS name3
+    FROM
+	    menu m1
+	LEFT JOIN menu m2 ON m1.id = m2.parentId
+	LEFT JOIN menu m3 ON m2.id = m3.parentId
+    WHERE
+	    m3.enabled = TRUE
+    ORDER BY
+      id1,
+      id2,
+      id3
+  </select>
+
   <select id="getAllMenusWithRoles" resultMap="MenusWithRoles">
     SELECT
       m.*,
