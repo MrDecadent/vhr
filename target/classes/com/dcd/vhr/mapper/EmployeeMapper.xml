@@ -37,6 +37,11 @@
     school, beginDate, workState, workID, contractTerm, conversionTime, notWorkDate, 
     beginContract, endContract, workAge
   </sql>
+
+  <select id="selectHasEmpByDepId" resultType="java.lang.Integer">
+    select count(*) from employee where departmentId = #{depId}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
