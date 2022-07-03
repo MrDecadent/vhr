@@ -85,6 +85,52 @@
       </if>
     </trim>
   </insert>
+
+  <insert id="insertSelectiveReturnId" parameterType="com.dcd.vhr.model.Department"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="deppath != null" >
+        depPath,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="isparent != null" >
+        isParent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="deppath != null" >
+        #{deppath,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="isparent != null" >
+        #{isparent,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.dcd.vhr.model.Department" >
     update department
     <set >

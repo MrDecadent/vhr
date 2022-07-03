@@ -18,4 +18,6 @@ public interface DepartmentMapper {
     int updateByPrimaryKey(Department record);
 
     List<Department> getAllDepartmentByParentId(Integer parentId);
+
+    Integer insertSelectiveReturnId(Department dep);
 }

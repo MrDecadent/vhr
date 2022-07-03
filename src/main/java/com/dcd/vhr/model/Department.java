@@ -1,5 +1,6 @@
 package com.dcd.vhr.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
@@ -9,7 +10,7 @@ public class Department {
 
     private Integer parentid;
 
-    private List<Department> children;
+    private List<Department> children = new ArrayList<>();
 
     private String deppath;
 
