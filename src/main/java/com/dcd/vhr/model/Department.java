@@ -1,5 +1,7 @@
 package com.dcd.vhr.model;
 
+import java.util.List;
+
 public class Department {
     private Integer id;
 
@@ -7,11 +9,21 @@ public class Department {
 
     private Integer parentid;
 
+    private List<Department> children;
+
     private String deppath;
 
     private Boolean enabled;
 
     private Boolean isparent;
+
+    public List<Department> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Department> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;

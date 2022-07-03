@@ -9,9 +9,23 @@
     <result column="enabled" property="enabled" jdbcType="BIT" />
     <result column="isParent" property="isparent" jdbcType="BIT" />
   </resultMap>
+
+  <resultMap id="DepartmentWithChildren" type="com.dcd.vhr.model.Department"
+             extends="BaseResultMap">
+    <collection property="children" ofType="com.dcd.vhr.model.Department"
+                select="com.dcd.vhr.mapper.DepartmentMapper.getAllDepartmentByParentId"
+                column="id"/>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, parentId, depPath, enabled, isParent
   </sql>
+
+  <select id="getAllDepartmentByParentId" resultMap="DepartmentWithChildren">
+    select <include refid="Base_Column_List" />
+    from department
+    where parentId = #{parentId}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
