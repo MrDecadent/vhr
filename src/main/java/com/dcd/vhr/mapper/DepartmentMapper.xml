@@ -20,6 +20,10 @@
     id, name, parentId, depPath, enabled, isParent
   </sql>
 
+  <select id="selectHasDepByPid" resultType="java.lang.Integer">
+    select count(*) from department where parentId = #{parentId}
+  </select>
+
   <select id="getAllDepartmentByParentId" resultMap="DepartmentWithChildren">
     select <include refid="Base_Column_List" />
     from department

@@ -20,4 +20,6 @@ public interface DepartmentMapper {
     List<Department> getAllDepartmentByParentId(Integer parentId);
 
     Integer insertSelectiveReturnId(Department dep);
+
+    Integer selectHasDepByPid(Integer parentId);
 }

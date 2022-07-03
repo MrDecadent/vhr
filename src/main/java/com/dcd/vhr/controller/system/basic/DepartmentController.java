@@ -27,4 +27,19 @@ public class DepartmentController {
         }
         return RespBean.error("更新失败");
     }
+
+    @DeleteMapping("/{id}")
+    public RespBean deleteDepartment(@PathVariable Integer id){
+        Integer result = departmentService.deleteDepartment(id);
+        if (result == 1){
+            return RespBean.ok("删除成功");
+        }else if (result == -2){//删除的部门有子部门
+            return RespBean.error("删除失败,该部门下有子部门");
+        }else if (result == -1){//删除的部门有员工
+            return RespBean.error("删除失败,该部门下有员工");
+        }else {
+            return RespBean.error("删除失败");
+        }
+
+    }
 }
