@@ -2,12 +2,14 @@ package com.dcd.vhr.service;
 
 import com.dcd.vhr.mapper.HrMapper;
 import com.dcd.vhr.model.Hr;
+import com.dcd.vhr.utils.HrUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class HrService implements UserDetailsService {
@@ -24,4 +26,8 @@ public class HrService implements UserDetailsService {
         return hr;
     }
 
+    public List<Hr> getAllHrs() {
+        //不查自己的id
+        return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId());
+    }
 }
