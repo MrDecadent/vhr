@@ -45,6 +45,11 @@
         r.id = hrr.rid
     where
         hr.id != #{id}
+    <if test="keywords != null">
+      and hr.name like concat('%',#{keywords},'%')
+    </if>
+    Order by
+        hr.id
   </select>
 
   <select id="getHrRolesById" resultType="com.dcd.vhr.model.Role">

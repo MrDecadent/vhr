@@ -23,5 +23,5 @@ public interface HrMapper {
 
     List<Role> getHrRolesById(Integer id);
 
-    List<Hr> getAllHrs(@Param("id") Integer id);
+    List<Hr> getAllHrs(@Param("id") Integer id, @Param("keywords") String keywords);
 }

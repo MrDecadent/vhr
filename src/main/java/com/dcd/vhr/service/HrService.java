@@ -31,9 +31,9 @@ public class HrService implements UserDetailsService {
         return hr;
     }
 
-    public List<Hr> getAllHrs() {
+    public List<Hr> getAllHrs(String keywords) {
         //不查自己的id
-        return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId());
+        return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId(),keywords);
     }
 
     public Integer updateHr(Hr hr) {
@@ -45,5 +45,11 @@ public class HrService implements UserDetailsService {
         //先删除，再添加
         hrRoleMapper.deleteByHrid(hid);
         return hrRoleMapper.addRole(hid,rids) == rids.length;
+    }
+
+    @Transactional
+    public Integer deleteHrById(Integer id) {
+        hrRoleMapper.deleteByHrid(id);
+        return hrMapper.deleteByPrimaryKey(id);
     }
 }
