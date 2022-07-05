@@ -45,6 +45,8 @@
         r.id = hrr.rid
     where
         hr.id != #{id}
+    Order by
+        hr.id
   </select>
 
   <select id="getHrRolesById" resultType="com.dcd.vhr.model.Role">

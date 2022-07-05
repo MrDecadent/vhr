@@ -9,6 +9,20 @@
   <sql id="Base_Column_List" >
     id, hrid, rid
   </sql>
+
+  <insert id="addRole">
+    insert into hr_role (hrid,rid)
+    values 
+    <foreach collection="rids" item="rid" separator=",">
+      (#{hid},#{rid})
+    </foreach>
+  </insert>
+  
+  <delete id="deleteByHrid">
+    DELETE from hr_role
+    where hrid = #{hid}
+  </delete>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

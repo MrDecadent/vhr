@@ -1,12 +1,14 @@
 package com.dcd.vhr.service;
 
 import com.dcd.vhr.mapper.HrMapper;
+import com.dcd.vhr.mapper.HrRoleMapper;
 import com.dcd.vhr.model.Hr;
 import com.dcd.vhr.utils.HrUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +18,9 @@ public class HrService implements UserDetailsService {
 
     @Resource
     HrMapper hrMapper;
+
+    @Resource
+    HrRoleMapper hrRoleMapper;
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Hr hr = hrMapper.loadUserByUsername(s);
@@ -33,5 +38,12 @@ public class HrService implements UserDetailsService {
 
     public Integer updateHr(Hr hr) {
         return hrMapper.updateByPrimaryKeySelective(hr);
+    }
+
+    @Transactional
+    public boolean updateHrRoles(Integer hid, Integer[] rids) {
+        //先删除，再添加
+        hrRoleMapper.deleteByHrid(hid);
+        return hrRoleMapper.addRole(hid,rids) == rids.length;
     }
 }
