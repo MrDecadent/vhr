@@ -59,6 +59,52 @@ public class Employee {
 
     private Integer workage;
 
+    private Nation nation;
+    private Politicsstatus politicsstatus;
+    private Department department;
+    private JobLevel jobLevel;
+    private Position position;
+
+    public Nation getNation() {
+        return nation;
+    }
+
+    public void setNation(Nation nation) {
+        this.nation = nation;
+    }
+
+    public Politicsstatus getPoliticsstatus() {
+        return politicsstatus;
+    }
+
+    public void setPoliticsstatus(Politicsstatus politicsstatus) {
+        this.politicsstatus = politicsstatus;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public JobLevel getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(JobLevel jobLevel) {
+        this.jobLevel = jobLevel;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public Integer getId() {
         return id;
     }

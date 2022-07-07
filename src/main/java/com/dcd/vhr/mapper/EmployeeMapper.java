@@ -1,6 +1,9 @@
 package com.dcd.vhr.mapper;
 
 import com.dcd.vhr.model.Employee;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface EmployeeMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,8 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     Integer selectHasEmpByDepId(Integer depId);
+
+    List<Employee> getEmployeeByPage(@Param("page") Integer page,@Param("size") Integer size);
+
+    Long getTotal();
 }
