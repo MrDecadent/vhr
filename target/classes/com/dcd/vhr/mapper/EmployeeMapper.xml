@@ -31,6 +31,29 @@
     <result column="endContract" property="endcontract" jdbcType="DATE" />
     <result column="workAge" property="workage" jdbcType="INTEGER" />
   </resultMap>
+  
+  <resultMap id="AllEmployeeInfo" type="com.dcd.vhr.model.Employee" extends="BaseResultMap">
+    <association property="nation" javaType="com.dcd.vhr.model.Nation">
+      <id column="nid" property="id"/>
+      <result column="nName" property="name"/>
+    </association>
+    <association property="politicsstatus" javaType="com.dcd.vhr.model.Politicsstatus">
+      <id column="psid" property="id"/>
+      <result column="psName" property="name"/>
+    </association>
+    <association property="department" javaType="com.dcd.vhr.model.Department">
+      <id column="depid" property="id"/>
+      <result column="depName" property="name"/>
+    </association>
+    <association property="jobLevel" javaType="com.dcd.vhr.model.JobLevel">
+      <id column="jobid" property="id"/>
+      <result column="jobName" property="name"/>
+    </association>
+    <association property="position" javaType="com.dcd.vhr.model.Position">
+      <id column="poid" property="id"/>
+      <result column="poName" property="name"/>
+    </association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, 
     phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty, 
@@ -38,6 +61,34 @@
     beginContract, endContract, workAge
   </sql>
 
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from employee
+  </select>
+
+  <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
+    SELECT
+      e.*,
+      n.id AS nid,
+      n.`name` AS nName,
+      ps.id AS psid,
+      ps.`name` AS psName,
+      dep.id AS depid,
+      dep.`name` AS depName,
+      job.id AS jobid,
+      job.`name` as jobName,
+      po.id AS poid,
+      po.`name` as poName
+    FROM
+      employee e
+      LEFT JOIN nation n ON e.nationId = n.id
+      LEFT JOIN politicsstatus ps ON ps.id = e.politicId
+      LEFT JOIN department dep ON dep.id = e.departmentId
+      LEFT JOIN joblevel job ON job.id = e.jobLevelId
+      LEFT JOIN position po on po.id = e.posId
+    LIMIT
+        #{page},#{size}
+  </select>
+  
   <select id="selectHasEmpByDepId" resultType="java.lang.Integer">
     select count(*) from employee where departmentId = #{depId}
   </select>
