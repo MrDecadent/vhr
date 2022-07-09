@@ -1,11 +1,10 @@
 package com.dcd.vhr.controller.emp;
 
+import com.dcd.vhr.model.Employee;
+import com.dcd.vhr.model.RespBean;
 import com.dcd.vhr.model.RespPageBean;
 import com.dcd.vhr.service.EmpService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -23,4 +22,14 @@ public class EmpController {
                                           String keywords){
         return empService.getEmployeeByPage(page,size,keywords);
     }
+
+    @PutMapping("/")
+    public RespBean addEmployee(@RequestBody Employee employee){
+        if (empService.addEmployee(employee) == 1){
+            return RespBean.ok("添加成功");
+        }else {
+            return RespBean.error("添加失败");
+        }
+    }
+
 }

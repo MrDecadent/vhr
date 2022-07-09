@@ -63,6 +63,11 @@
 
   <select id="getTotal" resultType="java.lang.Long">
     select count(*) from employee
+    <where>
+      <if test="_parameter != null and _parameter != ''">
+        name LIKE concat('%',#{_parameter},'%')
+      </if>
+    </where>
   </select>
 
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
@@ -85,6 +90,11 @@
       LEFT JOIN department dep ON dep.id = e.departmentId
       LEFT JOIN joblevel job ON job.id = e.jobLevelId
       LEFT JOIN position po on po.id = e.posId
+    <where>
+      <if test="keywords != null and keywords != ''">
+        e.name LIKE concat('%',#{keywords},'%')
+      </if>
+    </where>
     LIMIT
         #{page},#{size}
   </select>
