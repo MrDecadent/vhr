@@ -1,12 +1,11 @@
 package com.dcd.vhr.controller.emp;
 
-import com.dcd.vhr.model.Employee;
-import com.dcd.vhr.model.RespBean;
-import com.dcd.vhr.model.RespPageBean;
+import com.dcd.vhr.model.*;
 import com.dcd.vhr.service.EmpService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/emp/basic")
@@ -32,4 +31,18 @@ public class EmpController {
         }
     }
 
+    @GetMapping("/nations")
+    public List<Nation> getAllNations(){
+        return empService.getAllNations();
+    }
+
+    @GetMapping("/politic")
+    public List<Politicsstatus> getAllPolitic(){
+        return empService.getAllPolitic();
+    }
+
+    @GetMapping("/jobLevels")
+    public List<JobLevel> getAllJobLevels(){
+        return empService.getAllJobLevels();
+    }
 }

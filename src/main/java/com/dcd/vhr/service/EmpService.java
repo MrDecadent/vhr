@@ -1,8 +1,7 @@
 package com.dcd.vhr.service;
 
 import com.dcd.vhr.mapper.EmployeeMapper;
-import com.dcd.vhr.model.Employee;
-import com.dcd.vhr.model.RespPageBean;
+import com.dcd.vhr.model.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,6 +11,15 @@ import java.util.List;
 public class EmpService {
     @Resource
     EmployeeMapper employeeMapper;
+
+    @Resource
+    NationService nationService;
+
+    @Resource
+    politicsStatusService politicsStatusService;
+
+    @Resource
+    JobLevelService jobLevelService;
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size,String keywords) {
         if (page != null && size != null){
@@ -27,5 +35,17 @@ public class EmpService {
 
     public Integer addEmployee(Employee employee) {
         return employeeMapper.insertSelective(employee);
+    }
+
+    public List<Nation> getAllNations() {
+        return nationService.getAllNations();
+    }
+
+    public List<Politicsstatus> getAllPolitic() {
+        return politicsStatusService.getAllPolitic();
+    }
+
+    public List<JobLevel> getAllJobLevels() {
+        return jobLevelService.getAllJobLevel();
     }
 }
