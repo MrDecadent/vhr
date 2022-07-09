@@ -11,15 +11,14 @@ import java.util.List;
 public class EmpService {
     @Resource
     EmployeeMapper employeeMapper;
-
     @Resource
     NationService nationService;
-
     @Resource
     politicsStatusService politicsStatusService;
-
     @Resource
     JobLevelService jobLevelService;
+    @Resource
+    PositionService positionService;
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size,String keywords) {
         if (page != null && size != null){
@@ -47,5 +46,9 @@ public class EmpService {
 
     public List<JobLevel> getAllJobLevels() {
         return jobLevelService.getAllJobLevel();
+    }
+
+    public List<Position> getAllPositions() {
+        return positionService.getAllPositions();
     }
 }

@@ -45,4 +45,9 @@ public class EmpController {
     public List<JobLevel> getAllJobLevels(){
         return empService.getAllJobLevels();
     }
+
+    @GetMapping("/positions")
+    public List<Position> getAllPositions(){
+        return empService.getAllPositions();
+    }
 }
