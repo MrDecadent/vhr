@@ -19,7 +19,8 @@ public class EmpController {
     @GetMapping("/")
     public RespPageBean getEmployeeByPage(//默认值第一页，十条记录
             @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer size){
-        return empService.getEmployeeByPage(page,size);
+            @RequestParam(defaultValue = "10") Integer size,
+                                          String keywords){
+        return empService.getEmployeeByPage(page,size,keywords);
     }
 }

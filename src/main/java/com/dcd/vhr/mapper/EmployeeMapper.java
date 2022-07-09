@@ -20,7 +20,9 @@ public interface EmployeeMapper {
 
     Integer selectHasEmpByDepId(Integer depId);
 
-    List<Employee> getEmployeeByPage(@Param("page") Integer page,@Param("size") Integer size);
+    List<Employee> getEmployeeByPage(@Param("page") Integer page
+            , @Param("size") Integer size
+            , @Param("keywords") String keywords);
 
-    Long getTotal();
+    Long getTotal(String keywords);
 }
