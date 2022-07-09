@@ -25,4 +25,6 @@ public interface EmployeeMapper {
             , @Param("keywords") String keywords);
 
     Long getTotal(String keywords);
+
+    Integer getMaxWorkId();
 }

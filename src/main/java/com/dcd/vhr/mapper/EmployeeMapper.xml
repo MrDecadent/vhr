@@ -61,6 +61,10 @@
     beginContract, endContract, workAge
   </sql>
 
+  <select id="getMaxWorkId" resultType="java.lang.Integer">
+    select distinct max(workID) from employee;
+  </select>
+
   <select id="getTotal" resultType="java.lang.Long">
     select count(*) from employee
     <where>

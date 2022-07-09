@@ -50,4 +50,9 @@ public class EmpController {
     public List<Position> getAllPositions(){
         return empService.getAllPositions();
     }
+
+    @GetMapping("/MaxWorkId")
+    public RespBean getMaxWorkId(){
+        return RespBean.build().setStatus(200).setObject(String.format("%08d", empService.getMaxWorkId()+1));
+    }
 }

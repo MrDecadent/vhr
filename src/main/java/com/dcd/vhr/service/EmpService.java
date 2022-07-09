@@ -51,4 +51,8 @@ public class EmpService {
     public List<Position> getAllPositions() {
         return positionService.getAllPositions();
     }
+
+    public Integer getMaxWorkId() {
+        return employeeMapper.getMaxWorkId();
+    }
 }
