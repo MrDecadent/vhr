@@ -1,5 +1,7 @@
 package com.dcd.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Employee {
@@ -9,6 +11,7 @@ public class Employee {
 
     private String gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date birthday;
 
     private String idcard;
@@ -41,6 +44,7 @@ public class Employee {
 
     private String school;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date begindate;
 
     private String workstate;
@@ -49,12 +53,16 @@ public class Employee {
 
     private Double contractterm;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date conversiontime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date notworkdate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date begincontract;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date endcontract;
 
     private Integer workage;
