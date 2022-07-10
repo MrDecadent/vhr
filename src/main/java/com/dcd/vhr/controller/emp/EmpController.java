@@ -27,11 +27,19 @@ public class EmpController {
 
     @PostMapping("/")
     public RespBean addEmployee(@RequestBody Employee employee){
-        System.out.println(employee.toString());
         if (empService.addEmployee(employee) == 1){
             return RespBean.ok("添加成功");
         }else {
             return RespBean.error("添加失败");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public RespBean deleteEmployeeById(@PathVariable Integer id){
+        if (empService.deleteEmployeeById(id) == 1){
+            return RespBean.ok("删除成功");
+        }else {
+            return RespBean.error("删除失败");
         }
     }
 
