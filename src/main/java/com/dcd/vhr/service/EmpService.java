@@ -2,6 +2,7 @@ package com.dcd.vhr.service;
 
 import com.dcd.vhr.mapper.EmployeeMapper;
 import com.dcd.vhr.model.*;
+import com.dcd.vhr.utils.EmpUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,6 +34,9 @@ public class EmpService {
     }
 
     public Integer addEmployee(Employee employee) {
+        Double contractTerm = EmpUtils.getContractTerm(employee);
+        employee.setContractterm(contractTerm);
+
         return employeeMapper.insertSelective(employee);
     }
 
@@ -61,6 +65,8 @@ public class EmpService {
     }
 
     public Integer updateEmployee(Employee employee) {
+        Double contractTerm = EmpUtils.getContractTerm(employee);
+        employee.setContractterm(contractTerm);
         return employeeMapper.updateByPrimaryKeySelective(employee);
     }
 }
