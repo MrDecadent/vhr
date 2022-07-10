@@ -43,6 +43,15 @@ public class EmpController {
         }
     }
 
+    @PutMapping("/")
+    public RespBean updateEmployee(@RequestBody Employee employee){
+        if (empService.updateEmployee(employee) == 1){
+            return RespBean.ok("更新成功");
+        }else {
+            return RespBean.error("更新失败");
+        }
+    }
+
     @GetMapping("/nations")
     public List<Nation> getAllNations(){
         return empService.getAllNations();
