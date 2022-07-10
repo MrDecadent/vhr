@@ -42,10 +42,13 @@ public class MenuService {
     }
 
     @Transactional  //添加事务
-    public Integer updateMenuRole(Integer rid, Integer[] mids) {
+    public Boolean updateMenuRole(Integer rid, Integer[] mids) {
         //先删除
         menuRoleMapper.deleteByRid(rid);
+        if (mids==null || mids.length == 0){
+            return true;
+        }
         //再添加
-        return menuRoleMapper.insertRecord(rid,mids);
+        return menuRoleMapper.insertRecord(rid,mids)== mids.length;
     }
 }
