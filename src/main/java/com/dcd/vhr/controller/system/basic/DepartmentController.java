@@ -23,9 +23,9 @@ public class DepartmentController {
     @PostMapping("/")
     public RespBean addDepartment(@RequestBody Department dep){
         if (departmentService.addDepartment(dep) == 1){
-            return RespBean.ok("更新成功",dep);
+            return RespBean.ok("添加成功",dep);
         }
-        return RespBean.error("更新失败");
+        return RespBean.error("添加失败");
     }
 
     @DeleteMapping("/{id}")

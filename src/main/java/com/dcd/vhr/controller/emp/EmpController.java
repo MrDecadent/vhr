@@ -1,6 +1,7 @@
 package com.dcd.vhr.controller.emp;
 
 import com.dcd.vhr.model.*;
+import com.dcd.vhr.service.DepartmentService;
 import com.dcd.vhr.service.EmpService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,8 @@ public class EmpController {
 
     @Resource
     EmpService empService;
+    @Resource
+    DepartmentService departmentService;
 
     @GetMapping("/")
     public RespPageBean getEmployeeByPage(//默认值第一页，十条记录
@@ -22,8 +25,9 @@ public class EmpController {
         return empService.getEmployeeByPage(page,size,keywords);
     }
 
-    @PutMapping("/")
+    @PostMapping("/")
     public RespBean addEmployee(@RequestBody Employee employee){
+        System.out.println(employee.toString());
         if (empService.addEmployee(employee) == 1){
             return RespBean.ok("添加成功");
         }else {
@@ -54,5 +58,10 @@ public class EmpController {
     @GetMapping("/MaxWorkId")
     public RespBean getMaxWorkId(){
         return RespBean.build().setStatus(200).setObject(String.format("%08d", empService.getMaxWorkId()+1));
+    }
+
+    @GetMapping("/department")
+    public List<Department> getAllDepartments(){
+        return departmentService.getAllDepartmentByParentId(-1);
     }
 }
