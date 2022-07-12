@@ -6,6 +6,7 @@ import com.dcd.vhr.utils.EmpUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,12 +22,13 @@ public class EmpService {
     @Resource
     PositionService positionService;
 
-    public RespPageBean getEmployeeByPage(Integer page, Integer size,String keywords) {
+    public RespPageBean getEmployeeByPage(Integer page, Integer size
+            , String keywords, Employee employee,Date[] begindatescope) {
         if (page != null && size != null){
             page = (page-1)*size;
         }
-        List<Employee> data = employeeMapper.getEmployeeByPage(page,size,keywords);
-        Long total = employeeMapper.getTotal(keywords);
+        List<Employee> data = employeeMapper.getEmployeeByPage(page,size,keywords,employee,begindatescope);
+        Long total = employeeMapper.getTotal(keywords,employee,begindatescope);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);

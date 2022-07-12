@@ -66,10 +66,31 @@
   </select>
 
   <select id="getTotal" resultType="java.lang.Long">
-    select count(*) from employee
+    select count(*) from employee e
     <where>
-      <if test="_parameter != null and _parameter != ''">
-        name LIKE concat('%',#{_parameter},'%')
+      <if test="keywords != null and keywords != ''">
+        e.name LIKE concat('%',#{keywords},'%')
+      </if>
+      <if test="emp.politicid != null and emp.politicid != ''">
+        and e.politicId = #{emp.politicid}
+      </if>
+      <if test="emp.nationid != null and emp.nationid != ''">
+        and e.nationId = #{emp.nationid}
+      </if>
+      <if test="emp.joblevelid != null and emp.joblevelid != ''">
+        and e.jobLevelId = #{emp.joblevelid}
+      </if>
+      <if test="emp.posid != null and emp.posid != ''">
+        and e.posId = #{emp.posid}
+      </if>
+      <if test="emp.engageform != null and emp.engageform != ''">
+        and e.engageForm = #{emp.engageform}
+      </if>
+      <if test="emp.departmentid != null and emp.departmentid != ''">
+        and e.departmentId = #{emp.departmentid}
+      </if>
+      <if test="begindatescope != null and begindatescope != ''">
+        and e.beginDate between #{begindatescope[0]} and #{begindatescope[1]}
       </if>
     </where>
   </select>
@@ -97,6 +118,27 @@
     <where>
       <if test="keywords != null and keywords != ''">
         e.name LIKE concat('%',#{keywords},'%')
+      </if>
+      <if test="emp.politicid != null and emp.politicid != ''">
+        and e.politicId = #{emp.politicid}
+      </if>
+      <if test="emp.nationid != null and emp.nationid != ''">
+        and e.nationId = #{emp.nationid}
+      </if>
+      <if test="emp.joblevelid != null and emp.joblevelid != ''">
+        and e.jobLevelId = #{emp.joblevelid}
+      </if>
+      <if test="emp.posid != null and emp.posid != ''">
+        and e.posId = #{emp.posid}
+      </if>
+      <if test="emp.engageform != null and emp.engageform != ''">
+        and e.engageForm = #{emp.engageform}
+      </if>
+      <if test="emp.departmentid != null and emp.departmentid != ''">
+        and e.departmentId = #{emp.departmentid}
+      </if>
+      <if test="begindatescope != null and begindatescope != ''">
+        and e.beginDate between #{begindatescope[0]} and #{begindatescope[1]}
       </if>
     </where>
     LIMIT

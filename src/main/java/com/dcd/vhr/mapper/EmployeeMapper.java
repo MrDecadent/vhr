@@ -3,6 +3,7 @@ package com.dcd.vhr.mapper;
 import com.dcd.vhr.model.Employee;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EmployeeMapper {
@@ -22,9 +23,13 @@ public interface EmployeeMapper {
 
     List<Employee> getEmployeeByPage(@Param("page") Integer page
             , @Param("size") Integer size
-            , @Param("keywords") String keywords);
+            , @Param("keywords") String keywords
+            ,@Param("emp") Employee employee
+            ,@Param("begindatescope") Date[] begindatescope);
 
-    Long getTotal(String keywords);
+    Long getTotal(@Param("keywords") String keywords
+            ,@Param("emp") Employee employee
+            ,@Param("begindatescope") Date[] begindatescope);
 
     Integer getMaxWorkId();
 }

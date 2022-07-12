@@ -6,10 +6,11 @@ import com.dcd.vhr.service.EmpService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/emp/basic")
+@RequestMapping("/employee/basic")
 public class EmpController {
 
     @Resource
@@ -21,8 +22,10 @@ public class EmpController {
     public RespPageBean getEmployeeByPage(//默认值第一页，十条记录
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
-                                          String keywords){
-        return empService.getEmployeeByPage(page,size,keywords);
+                                          String keywords,
+                                          Employee employee,
+                                          Date[] begindatescope){
+        return empService.getEmployeeByPage(page,size,keywords,employee,begindatescope);
     }
 
     @PostMapping("/")
