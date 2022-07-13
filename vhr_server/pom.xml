@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>vhr_server</artifactId>
-
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>vhr_web</module>
+        <module>vhr_mapper</module>
+        <module>vhr_model</module>
+        <module>vhr_service</module>
+    </modules>
 </project>
