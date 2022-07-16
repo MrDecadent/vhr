@@ -5,6 +5,8 @@ import com.dcd.vhr.mapper.MenuRoleMapper;
 import com.dcd.vhr.model.Hr;
 import com.dcd.vhr.model.Menu;
 import com.dcd.vhr.model.Role;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "menus_cache")
 public class MenuService {
 
     @Resource
@@ -28,6 +31,7 @@ public class MenuService {
     }
 
     //返回所有菜单以及所需要的所有角色
+    @Cacheable
     public List<Menu> getAllMenusWithRoles(){
         return menuMapper.getAllMenusWithRoles();
     }
