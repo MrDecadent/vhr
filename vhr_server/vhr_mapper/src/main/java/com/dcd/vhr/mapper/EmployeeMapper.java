@@ -32,4 +32,6 @@ public interface EmployeeMapper {
             ,@Param("begindatescope") Date[] begindatescope);
 
     Integer getMaxWorkId();
+
+    Employee getEmployeeById(Integer id);
 }

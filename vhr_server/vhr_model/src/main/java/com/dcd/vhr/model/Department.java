@@ -1,9 +1,10 @@
 package com.dcd.vhr.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Department {
+public class Department implements Serializable {
     private Integer id;
 
     private String name;

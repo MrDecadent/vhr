@@ -17,7 +17,9 @@ spring:
         debug: true
 
   rabbitmq:
+    host: 1.12.217.151
     username: MrDecadent
     password: 159357la
-    host: 1.12.217.151
     port: 5672
+    #不指定虚拟主机的话默认/，如果账户没权限就会异常
+    virtual-host: /mrd
