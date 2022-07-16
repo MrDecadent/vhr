@@ -7,3 +7,4 @@
 *.yml
 *.properties
 /vhr_server/vhr_web/target/classes/application.yml
+/mail_server/src/main/resources/application.yml
