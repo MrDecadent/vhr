@@ -95,30 +95,6 @@
     </where>
   </select>
 
-  <select id="getEmployeeById" resultMap="AllEmployeeInfo">
-    SELECT
-      e.*,
-      n.id AS nid,
-      n.`name` AS nName,
-      ps.id AS psid,
-      ps.`name` AS psName,
-      dep.id AS depid,
-      dep.`name` AS depName,
-      job.id AS jobid,
-      job.`name` as jobName,
-      po.id AS poid,
-      po.`name` as poName
-    FROM
-      employee e
-      LEFT JOIN nation n ON e.nationId = n.id
-      LEFT JOIN politicsstatus ps ON ps.id = e.politicId
-      LEFT JOIN department dep ON dep.id = e.departmentId
-      LEFT JOIN joblevel job ON job.id = e.jobLevelId
-      LEFT JOIN position po on po.id = e.posId
-    WHERE
-        e.id = #{id}
-  </select>
-
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
     SELECT
       e.*,
@@ -205,8 +181,7 @@
       #{begincontract,jdbcType=DATE}, #{endcontract,jdbcType=DATE}, #{workage,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dcd.vhr.model.Employee"
-          useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.dcd.vhr.model.Employee" >
     insert into employee
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

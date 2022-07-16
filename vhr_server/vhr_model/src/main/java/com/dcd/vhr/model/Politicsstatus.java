@@ -1,8 +1,6 @@
 package com.dcd.vhr.model;
 
-import java.io.Serializable;
-
-public class Politicsstatus implements Serializable {
+public class Politicsstatus {
     private Integer id;
 
     private String name;

@@ -4,6 +4,7 @@ import com.dcd.vhr.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -28,9 +29,8 @@ public class MailReceiver {
 
     public static final Logger logger = LoggerFactory.getLogger(MailReceiver.class);
 
-    @RabbitListener(queues = "dcd.mail.welcome")
+    @RabbitListener(queues = "dcd.mail")
     public void handler(Employee emp){
-        logger.info(emp.toString());
         //收到消息,发送邮件
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);

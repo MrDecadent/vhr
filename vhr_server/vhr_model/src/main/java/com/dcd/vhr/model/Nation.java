@@ -1,8 +1,6 @@
 package com.dcd.vhr.model;
 
-import java.io.Serializable;
-
-public class Nation implements Serializable {
+public class Nation {
     private Integer id;
 
     private String name;

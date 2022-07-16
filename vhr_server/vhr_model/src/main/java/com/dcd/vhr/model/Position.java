@@ -2,10 +2,9 @@ package com.dcd.vhr.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Position implements Serializable {
+public class Position {
     private Integer id;
 
     private String name;
