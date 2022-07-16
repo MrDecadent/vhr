@@ -6,3 +6,4 @@
 
 *.yml
 *.properties
+/vhr_server/vhr_web/target/classes/application.yml
