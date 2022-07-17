@@ -5,6 +5,7 @@ import com.dcd.vhr.model.*;
 import com.dcd.vhr.service.utils.EmpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.autoconfigure.amqp.RabbitRetryTemplateCustomizer;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EmpService {
@@ -25,6 +27,8 @@ public class EmpService {
     JobLevelService jobLevelService;
     @Resource
     PositionService positionService;
+    @Resource
+    MailSendLogService mailSendLogService;
     @Resource
     RabbitTemplate rabbitTemplate;
 
@@ -50,8 +54,28 @@ public class EmpService {
         int result = employeeMapper.insertSelective(employee);
         if (result == 1){
             Employee emp = employeeMapper.getEmployeeById(employee.getId());
-            logger.info(emp.toString());
-            rabbitTemplate.convertAndSend("dcd.mail.welcome",emp);
+            //生成消息的id
+            String msgId = UUID.randomUUID().toString();
+            MailSendLog mailSendLog = new MailSendLog();
+            mailSendLog.setMsgId(msgId);
+            mailSendLog.setCreateTime(new Date());
+            mailSendLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);
+            mailSendLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);
+            mailSendLog.setEmpId(emp.getId());
+            mailSendLog.setCount(0);
+            mailSendLog.setTryTime(
+                    new Date(System.currentTimeMillis() + 1000 * 60 * MailConstants.MSG_TIMEOUT));
+            mailSendLogService.insertSelective(mailSendLog);
+            rabbitTemplate.convertAndSend(
+                    MailConstants.MAIL_EXCHANGE_NAME
+                    ,MailConstants.MAIL_ROUTING_KEY_NAME
+                    ,emp
+                    ,new CorrelationData(msgId));
+            rabbitTemplate.convertAndSend(
+                    MailConstants.MAIL_EXCHANGE_NAME
+                    ,MailConstants.MAIL_ROUTING_KEY_NAME
+                    ,emp
+                    ,new CorrelationData(msgId));
         }
         return result;
     }
@@ -84,5 +108,9 @@ public class EmpService {
         Double contractTerm = EmpUtils.getContractTerm(employee);
         employee.setContractterm(contractTerm);
         return employeeMapper.updateByPrimaryKeySelective(employee);
+    }
+
+    public Employee getEmployeeById(Integer empId) {
+        return employeeMapper.getEmployeeById(empId);
     }
 }

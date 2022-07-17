@@ -17,6 +17,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.example</groupId>
 			<artifactId>vhr_model</artifactId>
 			<version>1.0-SNAPSHOT</version>

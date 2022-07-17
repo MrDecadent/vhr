@@ -1,5 +1,6 @@
 package com.example.mail_server;
 
+import com.dcd.vhr.model.MailConstants;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,6 @@ public class MailServerApplication {
 
 	@Bean
 	Queue queue(){
-		return new Queue("dcd.mail.welcome");
+		return new Queue(MailConstants.MAIL_QUEUE_NAME);
 	}
 }
