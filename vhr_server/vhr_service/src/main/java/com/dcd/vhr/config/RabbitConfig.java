@@ -32,6 +32,7 @@ public class RabbitConfig {
     RabbitTemplate rabbitTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
         rabbitTemplate.setConfirmCallback((data,ack,cause) ->{
+            assert data != null;
             String msgId = data.getId();
             if (ack){//判断消息是否发送成功
                 logger.info("["+msgId+"]:邮件发送成功");
